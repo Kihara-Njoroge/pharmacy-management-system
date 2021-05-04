@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from .models import *
 from .forms import *
-from django.core.paginator import Paginator
+from .filters import *
+
 
 # Create your views here.
 
@@ -22,10 +24,14 @@ def home(request):
 def customerList(request):
     customers = Customer.objects.all()
 
+    myFilter = CustomerFilter(request.GET, queryset=customers)
+    customers = myFilter.qs
+
     paginator = Paginator(customers, 10)
     page_number = request.GET.get('page', 1)
     customer_obj = paginator.get_page(page_number)
-    context = {'customers': customers, 'customer_obj': customer_obj}
+    context = {'customers': customers,
+               'customer_obj': customer_obj, 'myFilter': myFilter}
     return render(request, 'customers\customer_list.html', context)
 
 
@@ -50,10 +56,15 @@ def creditCustomers(request):
 # Suppliers
 def suppliersList(request):
     suppliers = Supplier.objects.all()
+
+    myFilter = SupplierFilter(request.GET, queryset=suppliers)
+    suppliers = myFilter.qs
+
     paginator = Paginator(suppliers, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-    context = {'suppliers': suppliers, 'page_obj': page_obj}
+    context = {'suppliers': suppliers,
+               'page_obj': page_obj, 'myFilter': myFilter}
     return render(request, 'suppliers\suppliers_list.html', context)
 
 
@@ -71,10 +82,13 @@ def addSupplier(request):
 # Manufacturer
 def manufacturersList(request):
     manufacturers = Manufacturer.objects.all()
+    myFilter = ManufacturerFilter(request.GET, queryset=manufacturers)
+    manufacturers = myFilter.qs
     paginator = Paginator(manufacturers, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-    context = {'manufacturers': manufacturers, 'page_obj': page_obj}
+    context = {'manufacturers': manufacturers,
+               'page_obj': page_obj, 'myFilter': myFilter}
     return render(request, 'manufacturers\manufacturers_list.html', context)
 
 
@@ -91,17 +105,21 @@ def addManufacturer(request):
 
 def medicineList(request):
     medicines = Medicine.objects.all()
+
+    myFilter = MedicineFilter(request.GET, queryset=medicines)
+    medicines = myFilter.qs
     paginator = Paginator(medicines, 7)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-    context = {'medicines': medicines, 'page_obj': page_obj}
+    context = {'medicines': medicines,
+               'page_obj': page_obj, 'myFilter': myFilter}
     return render(request, 'medicines\medicine_list.html', context)
 
 
 def addMedicine(request):
     form = MedicineForm()
     if request.method == 'POST':
-        form = MedicineForm(request.POST)
+        form = MedicineForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('medicine')
@@ -112,10 +130,13 @@ def addMedicine(request):
 # Invoice
 def invoiceList(request):
     invoices = Invoice.objects.all()
+    myFilter = InvoiceFilter(request.GET, queryset=invoices)
+    invoices = myFilter.qs
     paginator = Paginator(invoices, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-    context = {'invoices': invoices, 'page_obj': page_obj}
+    context = {'invoices': invoices,
+               'page_obj': page_obj, 'myFilter': myFilter}
     return render(request, 'invoices\invoices_list.html', context)
 
 
@@ -133,10 +154,13 @@ def addInvoice(request):
 # Purschases
 def purchaseList(request):
     purchases = Purchase.objects.all()
+    myFilter = PurchaseFilter(request.GET, queryset=purchases)
+    purchases = myFilter.qs
     paginator = Paginator(purchases, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-    context = {'purchases': purchases, 'page_obj': page_obj}
+    context = {'purchases': purchases,
+               'page_obj': page_obj, 'myFilter': myFilter}
 
     return render(request, 'purchases\purchases_list.html', context)
 

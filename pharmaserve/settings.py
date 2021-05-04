@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'dashboard',
 
-    'crispy_forms'
+    'crispy_forms',
+    'django_filters',
 
 ]
 

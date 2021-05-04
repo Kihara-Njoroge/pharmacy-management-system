@@ -2,8 +2,19 @@
 {% load static %}
 
 {% block content %}
-<table class="table table-striped">
 
+  <legend style="margin: 10px; padding: 5px; color: black;">Medicines
+    <a href="{% url 'add_medicine' %}">
+      <button type="submit" class="btn btn-success" style="float: right;">
+        <i class="fas fa-plus"> Add Medicines</i>
+      </button></a>
+  </legend>
+  <hr>
+  <form method="get">
+    {{ myFilter.form }}
+    <button class="btn btn-dark rounded" type="submit">Search</button>
+  </form><br>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">#</th>

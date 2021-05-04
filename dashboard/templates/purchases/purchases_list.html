@@ -2,13 +2,18 @@
 {% load static %}
 
 {% block content %}
-<table class="table table-striped">
-  <legend style="margin: 10px; padding: 5px; color: black;">Purchases List
-    <a href="{% url 'add_purchase' %}">
-    <button type="submit" class="btn btn-success" style="float: right;">
-      <i class="fas fa-plus"> Add Purchase</i>
+<legend style="margin: 10px; padding: 5px; color: black;">Purchases List
+  <a href="{% url 'add_purchase' %}">
+  <button type="submit" class="btn btn-success" style="float: right;">
+    <i class="fas fa-plus"> Add Purchase</i>
 </button></a>
 </legend>
+<form method="get">
+  {{ myFilter.form }}
+  <button class="btn btn-dark rounded" type="submit">Search</button>
+</form><br>
+<table class="table table-striped">
+
     <thead>
       <tr>
         <th scope="col">#</th>

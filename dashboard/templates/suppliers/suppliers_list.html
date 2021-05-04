@@ -2,6 +2,17 @@
 {% load static %}
 
 {% block content %}
+<legend style="margin: 10px; padding: 5px; color: black;">Suppliers
+  <a href="{% url 'add_supplier' %}">
+    <button type="submit" class="btn btn-success" style="float: right;">
+      <i class="fas fa-plus"> Add Supplier </i>
+    </button></a>
+</legend>
+<hr>
+<form method="get">
+  {{ myFilter.form }}
+  <button class="btn btn-dark rounded" type="submit">Search</button>
+</form><br>
 <table class="table table-striped">
 
     <thead>
