@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<form method="POST" style="margin: 10px; padding: 5px;">
+    <legend>Add A New Supplier</legend> <hr>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.name|as_crispy_field }}
+      </div>
+      <div class="col-6">
+            {{ form.email|as_crispy_field }}
+          </div>
+    </div>
+    <div class="row">
+          <div class="col-6">
+            {{ form.phone|as_crispy_field }}
+          </div>
+          <div class="col-6">
+            {{ form.adress|as_crispy_field }}
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          {{ form.county|as_crispy_field }}
+        </div>
+        <div class="col-4">
+          {{ form.town|as_crispy_field }}
+        </div>
+        <div class="col-4">
+            {{ form.balance|as_crispy_field }}
+          </div>
+      </div>
+    <button type="submit" class="btn btn-success" style="float: right;">Save Supplier</button>
+  </form>
+  <br>
+{% endblock %}

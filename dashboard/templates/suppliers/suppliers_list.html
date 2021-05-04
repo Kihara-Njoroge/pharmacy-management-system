@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Town</th>
+        <th scope="col">County</th>
+        <th scope="col">Balance</th>   
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for supplier in page_obj %}
+      <tr>
+       
+        <th scope="row"1></th>
+        <td>{{supplier.name}}</td>
+        <td>{{supplier.phone}}</td>
+        <td>{{supplier.email}}</td>
+        <td>{{supplier.adress}}</td>
+        <td>{{supplier.town}}</td>
+        <td>{{supplier.county}}</td>
+        <td>{{supplier.balance}}</td>
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+   
+  </table>
+  <div class="text-center container mt-5">
+    {% if page_obj.has_previous %}
+      <a href="?page={{page_obj.previos_page_number}}"><button type="button" class="btn btn-light">previous</button></a>
+    {% endif %}
+
+    <a><button type="button" class="btn btn-success">{{page_obj.number}}</button></a>
+
+    {% if customer_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}"><button type="button" class="btn btn-light">next</button></a>
+    {% endif %}
+
+  </div>
+{% endblock content%}

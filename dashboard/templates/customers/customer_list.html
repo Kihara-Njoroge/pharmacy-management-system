@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<legend style="margin: 10px; padding: 5px; color: black;">Customers
+  <a href="{% url 'add_customer' %}">
+  <button type="submit" class="btn btn-success" style="float: right;">
+    <i class="fas fa-plus"> Add Customers </i>
+</button></a>
+</legend>
+<hr>
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Town</th>
+        <th scope="col">County</th>    
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for customer in customer_obj %}
+      <tr>
+       
+        <th scope="row"1></th>
+        <td>{{customer.get_name}}</td>
+        <td>{{customer.age}}</td>
+        <td>{{customer.gender}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.adress}}</td>
+        <td>{{customer.town}}</td>
+        <td>{{customer.county}}</td>
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="text-center container mt-5">
+    {% if customer_obj.has_previous %}
+      <a href="?page={{customer_obj.previos_page_number}}"><button type="button" class="btn btn-light">previous</button></a>
+    {% endif %}
+
+    <a><button type="button" class="btn btn-success">{{customer_obj.number}}</button></a>
+
+    {% if customer_obj.has_next %}
+      <a href="?page={{ customer_obj.next_page_number }}"><button type="button" class="btn btn-light">next</button></a>
+    {% endif %}
+
+  </div>
+{% endblock content%}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Town</th>
+        <th scope="col">County</th>
+        <th scope="col">Balance</th>   
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for customer in customers %}
+      <tr>
+       
+        <th scope="row"1></th>
+        <td>{{customer.get_name}}</td>
+        <td>{{customer.age}}</td>
+        <td>{{customer.gender}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.adress}}</td>
+        <td>{{customer.town}}</td>
+        <td>{{customer.county}}</td>
+        <td>{{customer.balance}}</td>
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+   
+  </table>
+{% endblock content%}
